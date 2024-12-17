@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 // Define your MongoDB schema
 const weatherSchema = new mongoose.Schema({
-  date: { type: Date },
+  City: String,
   Time: String,
   temperature: Number,
   airQuality: {
@@ -25,7 +25,7 @@ const WeatherRecord = mongoose.model("WeatherRecord", weatherSchema);
 // MongoDB connection
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017", {
+    await mongoose.connect("mongodb://localhost:27017/test", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -48,16 +48,16 @@ const fetchAndSaveData = async () => {
     // Loop through the data and save each entry to MongoDB
     for (let entry of data) {
       // Ensure the city value is converted to a valid Date object
-      const cityDate = new Date(entry.date);
+      // const cityDate = entry.City;
       // console.log(entry.city, cityDate, entry.date);
 
-      if (isNaN(cityDate)) {
-        console.error("Invalid date:", entry.date); // Log invalid dates
-        continue; // Skip this entry if the date is invalid
-      }
+      // if (isNaN(cityDate)) {
+      //   console.error("Invalid city:", entry.City); // Log invalid dates
+      //   continue; // Skip this entry if the date is invalid
+      // }
 
       const weatherData = new WeatherRecord({
-        city: cityDate,
+        City: entry.City,
         Time: entry.Time,
         temperature: entry["Temperature (C)"],
         airQuality: {

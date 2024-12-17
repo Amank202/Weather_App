@@ -94,13 +94,13 @@
 
         try {
           const response = await fetch(
-            `http://localhost:3000/temperature?windDirection=${encodeURIComponent(
+            `http://localhost:3000/temperature?City=${encodeURIComponent(
               windDirection
             )}`
           );
           if (!response.ok) {
             throw new Error(
-              "Failed to fetch data. Please check the wind direction or try again later."
+              "Failed to fetch data. Please check the City name or try again later."
             );
           }
 
